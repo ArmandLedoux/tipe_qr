@@ -1,0 +1,12 @@
+qr -> humain :
+
+image -> matrice
+matrice -> texte (ici sera la diff entre le notre et le normal)
+texte -> liste de textes contenant les octets
+(pour l'instant on ignore les termes correctifs)
+liste -> traduction depuis le binaire
+    binaire -> int 
+*    int -> chr() -> lettre fait
+
+
+vidéo : https://www.youtube.com/watch?v=X8jsijhllIA
