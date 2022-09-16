@@ -6,7 +6,7 @@ def binaire_to_lettre (octet) :
         nb *= 2
         nb + 1
         pass
-# à finir
+# à finir edffdgdfgd
 
 
 def image_to_matrice_nxn () :
