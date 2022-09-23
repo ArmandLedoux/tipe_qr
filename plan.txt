@@ -1,3 +1,18 @@
+Encodage : 
+liste de lettre terminée -> découpe par 57 et on prend les prend les paquets par 64 (compléter avec des '\0')
+64 paquets de 57 -> ajoute les bits de parité pour avoir 64 paquets de 64
+64x64 -> mélange (les 1ers avec les 1ers, 2e avec 2e etc...)
+-> on les concaténe et on les stocke à la suite des autres dans des qr codes 
+
+
+
+
+
+
+
+
+
+
 qr -> humain :
 
 image -> matrice
