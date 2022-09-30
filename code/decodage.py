@@ -54,7 +54,7 @@ def retire_bits_de_parite(l) :
             q.append(l[i])
     return q
 
-# tests retire -----------------------
+# tests retire_bits_de_parite -----------------------
 # l = [randint(0,1) for i in range(16)]
 # print(l)
 # print(retire_bits_de_parite(l))
