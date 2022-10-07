@@ -1,33 +1,48 @@
+def lecture_matrice (m) :
+    pass
 
 
 
-def formation_des_paquets (lqr) : 
-    """après lecture du qr code, on a créé une liste contenant chacun des qr codes sous forme de listes"""
-    iqr = 0 # numéro du qr code
+
+def formation_des_paquets (lqr, N=64, n=64) : 
+    """après lecture du qr code, on a créé une liste contenant chacun des qr codes sous forme de listes.
+    on les convertit en une liste de paquets contenant N grilles à n élements pour hamming"""
     llpaquet = [] # liste des paquets
     lpaquet = [] # contient un paquet de taille 64*64 = 4096
-    i = 0 # pour repérer où 
+    i = 0 # pour repérer où on est dans le paquet
     for qr in lqr :
-        for j in range(len(qr)) : 
+        for j in range(len(qr)) :
             lpaquet.append(qr[j])
-            if i == 64*64 - 1 :
+            i+=1
+            if i == n*N : # on a terminé un paquet
+                i = 0
                 llpaquet.append(lpaquet) 
                 lpaquet = []
-    
+    lll = [formation(lpaquet,N,n) for lpaquet in llpaquet]
+    return lll 
+    # si on a un lpaquet non vide à la fin de l'algo, c'est qu'on a créé un début de lpaquet pour remplir le dernier qr code
 
-def formation (llpaquet) :
-    lll = []
-    for lpaquet in llpaquet :
-        ll = []
-        for i in range (64) :
-            l = []
-            for j in range(64) :
-                l.append(lpaquet[j*64+i])
-            ll.append(ll)
-        lll.append(ll)
-    return lll
+# def print_list_list (lll) : 
+#     for ll in lll :
+#         for l in ll :
+#             print (l)
+#         print(';')
+
+# l = [[i*1000 + j for j in range(1000)]for i in range(9)]
+# q = formation_des_paquets(l)
+
+# print_list_list (q)
+# print(len(q), len(q[0]),len(q[0][0]))
 
 
+def formation (lpaquet, N, n) :
+    ll = []
+    for i in range (N) :
+        l = []
+        for j in range(n) :
+            l.append(lpaquet[j*64+i])
+        ll.append(l)
+    return ll
 
 
 def application_hamming (lll) :
