@@ -1,9 +1,14 @@
-def lecture_matrice (m) :
+def decodage (lien_fichier) :
+    lqr = lecture_qr(lien_fichier)
+    lll = formation_des_paquets(lqr)
+    assemble(lll)
+
+def lecture_qr() :
     pass
 
 
 
-
+    
 def formation_des_paquets (lqr, N=64, n=64) : 
     """après lecture du qr code, on a créé une liste contenant chacun des qr codes sous forme de listes.
     on les convertit en une liste de paquets contenant N grilles à n élements pour hamming"""
@@ -22,6 +27,19 @@ def formation_des_paquets (lqr, N=64, n=64) :
     return lll 
     # si on a un lpaquet non vide à la fin de l'algo, c'est qu'on a créé un début de lpaquet pour remplir le dernier qr code
 
+def formation (lpaquet, N, n) :
+    ll = []
+    for i in range (N) :
+        l = []
+        for j in range(n) :
+            l.append(lpaquet[j*64+i])
+        ll.append(l)
+    return ll
+
+
+# -------------------------------------------------------------------------------------
+# tests formation_des_paquets
+
 # def print_list_list (lll) : 
 #     for ll in lll :
 #         for l in ll :
@@ -33,19 +51,12 @@ def formation_des_paquets (lqr, N=64, n=64) :
 
 # print_list_list (q)
 # print(len(q), len(q[0]),len(q[0][0]))
+# -------------------------------------------------------------------------------------
 
 
-def formation (lpaquet, N, n) :
-    ll = []
-    for i in range (N) :
-        l = []
-        for j in range(n) :
-            l.append(lpaquet[j*64+i])
-        ll.append(l)
-    return ll
 
 
-def application_hamming (lll) :
+def correction_d_erreur (lll) :
     """lll = [matrices de 64*64]
     On a lu les qr codes et formé nos paquets de 64 bits, 
     maintenant on corrige les potentielles erreurs"""
@@ -105,6 +116,12 @@ def assemble(lll) :
         for l in ll :
             concat(sequence, l)
     return sequence
+    n = len(sequence) 
+    for i in range(n-1,-1,-1) :
+        if sequence[i] != 0 :
+            return sequence[:i-1]
+        
+    
 
 # -------------------------------------------------------------------------------------
 # tests assemble
