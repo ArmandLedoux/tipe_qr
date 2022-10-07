@@ -79,4 +79,4 @@ def l1_to_l2 (l,n) :
 # l = [1,1,1,1,1,1,1,1,1,1,1]
 # print(l1_to_l2(l,16))
 
-def encodage_qr (l,n):
+def encodage_qr (l,n): 
