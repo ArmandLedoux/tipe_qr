@@ -70,8 +70,7 @@ def l1_to_l2 (l,n) :
     for i in range (1,n):
         if i == p :
             q.append(0)
-            p = p << 1
-            decal += 1
+            p = p < 1
         else :
             q.append(l[i - decal])
     return q
@@ -79,4 +78,68 @@ def l1_to_l2 (l,n) :
 # l = [1,1,1,1,1,1,1,1,1,1,1]
 # print(l1_to_l2(l,16))
 
-def encodage_qr (l,n): 
+def faire_matrice_qr (n,l,inter) :
+    m = np.zero(n,n)
+
+    for i in range (7):
+        m[0][i] = 1
+        m[0][n-1-i] = 1
+        m[6][i] = 1
+        m[6][n-1-i] = 1
+        m[n-1][i] = 1
+        m[n-8][i] = 1
+        m[i][0] = 1
+        m[n-1-i][0] = 1
+        m[i][6] = 1
+        m[n-1-i][6] = 1
+        m[i][n-1] = 1
+        m[i][n-8] = 1
+    
+    for i in range (1,6):
+        m[1][i] = 0
+        m[1][n-1-i] = 0
+        m[5][i] = 0
+        m[5][n-1-i] = 0
+        m[n-2][i] = 0
+        m[n-6][i] = 0
+        m[i][1] = 0
+        m[i][5] = 0
+        m[n-1-i][1] = 0
+        m[n-1-i][5] = 0
+        m[i][n-2] = 0
+        m[i][n-6] = 0
+       
+    for i in range (2,4):
+        m[2][i] = 1
+        m[4][i] = 1
+        m[2][n-1-i] = 1
+        m[4][n-1-i]
+        m[n-3][i] = 1
+        m[n-5][i] = 1
+        m[i][2] = 1
+        m[i][4] = 1
+        m[n-1-i][2] = 1
+        m[n-1-i][4] = 1
+        m[i][n-5] = 1
+        m[i][n-3] = 1
+
+    for k in range (len(l)):
+        decal = 8
+        i = k / n
+        j = k % n
+
+        if ((i > 7) or (j>7)) and ((i<n-8) or (j<n-8)) and ((i>7) or (j<n-8)):
+            if ((i % inter == 4) or (i % inter == 8)):                      #horizontales des cercles les plus excentrés
+                if (j % inter > 3) and (j % inter < 9):
+                    m[i][j] = 1
+            if (j % inter == 4) or (j % inter == 8):                        #verticales des cercles les plus excentrés
+                if (j % inter > 3) and (j % inter < 9):
+                    m[i][j] = 1
+            if (i % inter > 4) or (i % inter < 8) :                         #horizonta les des cercles les moins excentrés
+                if (j % inter > 4) and (j % inter < 8):
+                    m[i][j] = 0
+            if ( j % inter > 4) or (i % inter < 8) :                        #verticales des cercles les moins excentrés
+                if (i % inter > 4) and (i % inter < 8):
+                    m[i][j] = 0
+            if (i % inter == 6) and (j % inter == 6):                       #petit carré du milieu
+                m[i][j] = 1
