@@ -1,3 +1,4 @@
+import numpy as np
 def isol (l,n,k) :           #permet d'isoler un morceau du texte
     l2 = []
     for i in range (k) :
