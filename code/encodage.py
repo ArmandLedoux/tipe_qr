@@ -1,4 +1,3 @@
-import numpy as np
 def isol (l,n,k) :           #permet d'isoler un morceau du texte
     l2 = []
     for i in range (k) :
@@ -79,8 +78,20 @@ def l1_to_l2 (l,n) :
 # l = [1,1,1,1,1,1,1,1,1,1,1]
 # print(l1_to_l2(l,16))
 
-def faire_matrice_qr (n,l,inter) :
-    m = np.zero(n,n)
+def faire_matrice_qr (n,inter) :
+    m = []
+    for i in range (n):
+        m.append([])
+        for j in range (n):
+            m[i].append(-1)
+    
+    for i in range (8):
+        m[7][i] = 0
+        m[7][n-1-i] = 0
+        m[i][7] = 0
+        m[n-1-i][7] = 0
+        m[n-8][i] = 0
+        m[i][n-8] = 0
 
     for i in range (7):
         m[0][i] = 1
@@ -124,23 +135,40 @@ def faire_matrice_qr (n,l,inter) :
         m[i][n-5] = 1
         m[i][n-3] = 1
 
-    for k in range (len(l)):
-        decal = 8
-        i = k / n
-        j = k % n
+    for i in range (n):
+        for j in range (n) :
+            if ((i > 7) or (j>7)) and ((i<n-8) or (j<n-8)) and ((i>7) or (j<n-8)):
+                if ((i % inter == 4) or (i % inter == 8)):                      #horizontales des cercles les plus excentrés
+                    if (j % inter > 3) and (j % inter < 9):
+                        m[i][j] = 1
+                if (j % inter == 4) or (j % inter == 8):                        #verticales des cercles les plus excentrés
+                    if (j % inter > 3) and (j % inter < 9):
+                        m[i][j] = 1
+                if (i % inter > 4) or (i % inter < 8) :                         #horizonta les des cercles les moins excentrés
+                    if (j % inter > 4) and (j % inter < 8):
+                        m[i][j] = 0
+                if ( j % inter > 4) or (i % inter < 8) :                        #verticales des cercles les moins excentrés
+                    if (i % inter > 4) and (i % inter < 8):
+                        m[i][j] = 0
+                if (i % inter == 6) and (j % inter == 6):                       #petit carré du milieu
+                    m[i][j] = 1
+    return m
 
-        if ((i > 7) or (j>7)) and ((i<n-8) or (j<n-8)) and ((i>7) or (j<n-8)):
-            if ((i % inter == 4) or (i % inter == 8)):                      #horizontales des cercles les plus excentrés
-                if (j % inter > 3) and (j % inter < 9):
-                    m[i][j] = 1
-            if (j % inter == 4) or (j % inter == 8):                        #verticales des cercles les plus excentrés
-                if (j % inter > 3) and (j % inter < 9):
-                    m[i][j] = 1
-            if (i % inter > 4) or (i % inter < 8) :                         #horizonta les des cercles les moins excentrés
-                if (j % inter > 4) and (j % inter < 8):
-                    m[i][j] = 0
-            if ( j % inter > 4) or (i % inter < 8) :                        #verticales des cercles les moins excentrés
-                if (i % inter > 4) and (i % inter < 8):
-                    m[i][j] = 0
-            if (i % inter == 6) and (j % inter == 6):                       #petit carré du milieu
-                m[i][j] = 1
+def remplir_qr (n,l,inter):
+    mat = faire_matrice_qr(n,inter)
+    decal = 0
+    for k in range (len(l)):
+        if mat[k/n][k%n] != -1 :
+            decal += 1
+        else :
+            mat[k/n][k%n] = l[k+decal]
+
+test = faire_matrice_qr(177,18)
+
+def print_qr (qr) : 
+    '''permet de mieux vérifier la correction de faire_qr'''
+    for l in qr :
+        print (l)
+        print(';')
+
+print_qr (test)
