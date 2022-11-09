@@ -140,26 +140,27 @@ def faire_matrice_qr (n,inter) :
     m[3][n-4] = 1
     m[n-4][3] = 1
 
-    for i in range (n):
-        for j in range (n) :
-            if (m[i][j] == -1):
-                if ((i % inter == 4) or (i % inter == 8)):                      #horizontales des cercles les plus excentrés
-                    if (j % inter > 3) and (j % inter < 9):
-                        m[i][j] = 1
-                if (j % inter == 4) or (j % inter == 8):                        #verticales des cercles les plus excentrés
-                    if (i % inter > 3) and (i % inter < 9):
-                        m[i][j] = 1
-                if (i % inter > 4) and (i % inter < 8) :                         #horizonta les des cercles les moins excentrés
-                    if (j % inter > 4) and (j % inter < 8):
-                        m[i][j] = 0
-                if ( j % inter > 4) and (j % inter < 8) :                        #verticales des cercles les moins excentrés
-                    if (i % inter > 4) and (i % inter < 8):
-                        m[i][j] = 0
-                if (i % inter == 6) and (j % inter == 6):                       #petit carré du milieu
-                    m[i][j] = 1
+    # for i in range (n):
+    #     for j in range (n) :
+    #         if (m[i][j] == -1):
+    #             if ((i % inter == 4) or (i % inter == 8)):                      #horizontales des cercles les plus excentrés
+    #                 if (j % inter > 3) and (j % inter < 9):
+    #                     m[i][j] = 1
+    #             if (j % inter == 4) or (j % inter == 8):                        #verticales des cercles les plus excentrés
+    #                 if (i % inter > 3) and (i % inter < 9):
+    #                     m[i][j] = 1
+    #             if (i % inter > 4) and (i % inter < 8) :                         #horizonta les des cercles les moins excentrés
+    #                 if (j % inter > 4) and (j % inter < 8):
+    #                     m[i][j] = 0
+    #             if ( j % inter > 4) and (j % inter < 8) :                        #verticales des cercles les moins excentrés
+    #                 if (i % inter > 4) and (i % inter < 8):
+    #                     m[i][j] = 0
+    #             if (i % inter == 6) and (j % inter == 6):                       #petit carré du milieu
+    #                 m[i][j] = 1
     return m
 
 def remplir_qr (n,l,inter):
+    '''rempli le qr code après l'implémentation de chaque petits et grands carrés'''
     mat = faire_matrice_qr(n,inter)
     decal = 0
     for k in range (len(l)):
@@ -190,3 +191,9 @@ def print_qr (qr) :
 l = [0, 1, 0, 0, 0, 0, 1, 0, 1, 1, 1, 0, 0, 0, 0, 1, 1, 1, 1, 0, 1, 0, 1, 1, 0, 1, 0, 1, 0, 0, 1, 1, 1, 0, 1, 1, 0, 0, 0, 1]
 
 print_qr(remplir_qr(54,l,20))
+
+def encodage (l) = 
+    q = []
+    lll = faire_lll(l)
+    for i in range(len(lll)):
+        q.append(remplir_qr(54,lll[i],21))
