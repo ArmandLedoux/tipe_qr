@@ -1,4 +1,3 @@
-import matplotlib.pyplot as plt
 
 def isol (l,n,k) :           #permet d'isoler un morceau du texte
     l2 = []
@@ -164,12 +163,13 @@ def remplir_qr (n,l,inter):
     mat = faire_matrice_qr(n,inter)
     decal = 0
     for k in range (len(l)):
-        if mat[k/n][k%n] != -1 :
+        if mat[k//n][k%n] != -1 :
             decal += 1
         else :
-            mat[k/n][k%n] = l[k+decal]
+            mat[k//n][k%n] = l[k-decal]
+    return mat
 
-test = faire_matrice_qr(54,18)
+test = faire_matrice_qr(54,20)
 
 def print_qr (qr) : 
     '''permet de mieux vérifier la correction de faire_qr'''
@@ -183,7 +183,10 @@ def print_qr (qr) :
             elif qr[i][j] == 1 :
                 line = line + '*'
             else :
-                print("Erreur : element non rempli de -1, 0 ou 1")
+                line = line + str(qr[i][j])
         print(line)
 
-print_qr(test)
+
+l = [0, 1, 0, 0, 0, 0, 1, 0, 1, 1, 1, 0, 0, 0, 0, 1, 1, 1, 1, 0, 1, 0, 1, 1, 0, 1, 0, 1, 0, 0, 1, 1, 1, 0, 1, 1, 0, 0, 0, 1]
+
+print_qr(remplir_qr(54,l,20))
