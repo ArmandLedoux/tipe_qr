@@ -1,14 +1,3 @@
-def decodage (lien_fichier) :
-    lqr = lecture_qr(lien_fichier)
-    lll = formation_des_paquets(lqr)
-    assemble(lll)
-
-def lecture_qr() :
-    pass
-
-
-
-    
 def formation_des_paquets (lqr, N=64, n=64) : 
     """après lecture du qr code, on a créé une liste contenant chacun des qr codes sous forme de listes.
     on les convertit en une liste de paquets contenant N grilles à n élements pour hamming"""
