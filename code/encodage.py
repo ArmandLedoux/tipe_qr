@@ -1,3 +1,5 @@
+from random import *
+seed(31)
 
 def isol (l,n,k) :           #permet d'isoler un morceau du texte
     l2 = []
@@ -47,8 +49,7 @@ def print_list_list (lll) :
 # print_list_list(faire_lll (test))
 
 
-
-def hamming_code (n,l) :
+def hamming_code (l,n=3) :
     """l de taille 64"""
     q = l.copy()
     x = 0
@@ -79,7 +80,7 @@ def l1_to_l2 (l,n) :
 # l = [1,1,1,1,1,1,1,1,1,1,1]
 # print(l1_to_l2(l,16))
 
-def faire_matrice_qr (n,inter) :
+def faire_matrice_qr (n) :
     m = []
     for i in range (n):
         m.append([])
@@ -159,18 +160,22 @@ def faire_matrice_qr (n,inter) :
     #                 m[i][j] = 1
     return m
 
-def remplir_qr (n,l,inter):
+def remplir_qr (n,l):
     '''rempli le qr code après l'implémentation de chaque petits et grands carrés'''
-    mat = faire_matrice_qr(n,inter)
+    mat = faire_matrice_qr(n)
     decal = 0
     for k in range (len(l)):
         if mat[k//n][k%n] != -1 :
             decal += 1
         else :
             mat[k//n][k%n] = l[k-decal]
+    for i in range (n):
+        for j in range(n) :
+            if mat[i][j] == -1 :
+                mat[i][j] = 0
     return mat
 
-test = faire_matrice_qr(54,20)
+# test = faire_matrice_qr(54)
 
 def print_qr (qr) : 
     '''permet de mieux vérifier la correction de faire_qr'''
@@ -188,12 +193,16 @@ def print_qr (qr) :
         print(line)
 
 
-l = [0, 1, 0, 0, 0, 0, 1, 0, 1, 1, 1, 0, 0, 0, 0, 1, 1, 1, 1, 0, 1, 0, 1, 1, 0, 1, 0, 1, 0, 0, 1, 1, 1, 0, 1, 1, 0, 0, 0, 1]
+# l = [0, 1, 0, 0, 0, 0, 1, 0, 1, 1, 1, 0, 0, 0, 0, 1, 1, 1, 1, 0, 1, 0, 1, 1, 0, 1, 0, 1, 0, 0, 1, 1, 1, 0, 1, 1, 0, 0, 0, 1]
 
-print_qr(remplir_qr(54,l,20))
+# print_qr(remplir_qr(54,l))
 
-def encodage (l) = 
+def encodage (l) : 
     q = []
-    lll = faire_lll(l)
+    lll = faire_lll(hamming_code(l1_to_l2(l,64)))
     for i in range(len(lll)):
-        q.append(remplir_qr(54,lll[i],21))
+        q.append(remplir_qr(64, lll[i]))
+    return q
+
+texte = [randint(0,1) for i in range(10000)]
+print(encodage(texte))
