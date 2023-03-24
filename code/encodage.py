@@ -164,12 +164,17 @@ def faire_matrice_qr (n) :
     #                     m[i][j] = 0
     #             if (i % inter == 6) and (j % inter == 6):                       #petit carré du milieu
     #                 m[i][j] = 1
-    return m
-
-
-
-            
-
+    mf = []
+    for i in range (n+1) :
+        mf.append(0)
+    for i in range(n) :
+        mf.append([0])
+        for j in range (n) :
+            mf[i][j+1].append(m[i][j])
+        mf[i][n+1].append(0)
+    for i in range (n+1) :
+        mf.append(0)
+    return mf
 
 def remplir_lqr (l, largeur=64):
     '''rempli le qr code après l'implémentation de chaque petits et grands carrés
@@ -211,7 +216,7 @@ def remplir_lqr (l, largeur=64):
 
 
 
-def encodage (texte, nb_mat=64, nb_cor=3) : 
+def encodage (texte, nb_mat=64, nb_cor=6) : 
     '''nb_mat : taille des matrices de correction d'erreur 
     nb_cor + 1 : nombre de bits de correction d'erreur par matrices de correction d'erreur
     2^nb_cor = taille des matrices de correction d'erreur'''
