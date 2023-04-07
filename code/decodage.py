@@ -179,3 +179,22 @@ def decodage (llqr,nb_mat=64,nb_cor=6) :
 # print(decodage(llqr))
 
 # print("ok")
+
+
+#SCANNER LE QR CODE VIDEO 
+
+import cv2
+
+# Ouverture de la vidéo
+video = cv2.VideoCapture('ma_video.mp4')
+
+# Boucle pour extraire chaque image
+success, image = video.read()
+count = 0
+while success:
+    # Enregistrement de l'image extraite
+    cv2.imwrite("frame%d.jpg" % count, image)
+    success, image = video.read()
+    count += 1
+
+#ensuite il faut que j'implémente une fonction qui prends une vidéo filmé par un téléphone et qui traduit les qr codes etc...
