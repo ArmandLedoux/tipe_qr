@@ -164,16 +164,17 @@ def faire_matrice_qr (n) :
     #                     m[i][j] = 0
     #             if (i % inter == 6) and (j % inter == 6):                       #petit carré du milieu
     #                 m[i][j] = 1
-    mf = []
+    mf = [[]]
     for i in range (n+1) :
-        mf.append(0)
+        mf[0].append(0)
     for i in range(n) :
         mf.append([0])
         for j in range (n) :
-            mf[i][j+1].append(m[i][j])
-        mf[i][n+1].append(0)
+            mf[i].append(m[i][j])
+        mf[i].append(0)
+    mf.append([])
     for i in range (n+1) :
-        mf.append(0)
+        mf[n+1].append(0)
     return mf
 
 def remplir_lqr (l, largeur=64):
