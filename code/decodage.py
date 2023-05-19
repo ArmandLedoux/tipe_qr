@@ -198,3 +198,29 @@ while success:
     count += 1
 
 #ensuite il faut que j'implémente une fonction qui prends une vidéo filmé par un téléphone et qui traduit les qr codes etc...
+
+from pyzbar.pyzbar import decode
+from PIL import Image
+
+def qr_code_to_text(image_path):
+    # Ouvrir l'image contenant le code QR
+    image = Image.open(image_path)
+
+    # Décoder le code QR
+    qr_codes = decode(image)
+
+    # Extraire le texte du code QR
+    text = ''
+    for qr_code in qr_codes:
+        text += qr_code.data.decode('utf-8')
+
+    return text
+
+# Chemin d'accès à l'image contenant le code QR
+image_path = 'chemin/vers/qr_code.png'
+
+# Appeler la fonction pour traduire le code QR en texte
+qr_text = qr_code_to_text(image_path)
+
+# Afficher le texte extrait du code QR
+print("Code QR traduit en texte :", qr_text)
