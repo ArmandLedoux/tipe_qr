@@ -224,3 +224,5 @@ qr_text = qr_code_to_text(image_path)
 
 # Afficher le texte extrait du code QR
 print("Code QR traduit en texte :", qr_text)
+
+# Faire une fonction qui calcule le nombre d'erreurs entre le texte d'entrée et le texte de sortie 
