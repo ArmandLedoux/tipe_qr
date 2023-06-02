@@ -60,6 +60,15 @@ Résultat théoriques ; Les valeurs non nulles ne sont pas significatives
 48 |126976|   0 |   0 |   0 |   0 |   0 |   0 |   0 |   0 |   0 
 56 |141312|   0 |   0 |   0 |   0 |   0 |   0 |   0 |   0 |   0 
 
+Tableau 6 : comme tableau 5 mais erreurs significatives
+-  | | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900
+8  | |   0 | 740 |2405 |5365 |6660 |7215 |7585 |7215 |7585 
+16 | |   0 |   0 |   0 |   0 | 555 |1110 |2960 |5550 |6845 
+24 | |   0 |   0 |   0 |   0 |   0 |   0 |   0 | 185 |1110 
+32 | |   0 |   0 |   0 |   0 |   0 |   0 |   0 |   0 |   0 
+40 | |   0 |   0 |   0 |   0 |   0 |   0 |   0 |   0 |   0 
+48 | |   0 |   0 |   0 |   0 |   0 |   0 |   0 |   0 |   0 
+56 | |   0 |   0 |   0 |   0 |   0 |   0 |   0 |   0 |   0 
 
 Temps d'execution pour Reed-Solomon 8 en c : taille du message envoyé : 256 ; t=32; nombre d'erreurs allant de 0 à 64; répété 100 fois sur les mêmes entrées
 temps pour 6400 décodages : 72.831526s
